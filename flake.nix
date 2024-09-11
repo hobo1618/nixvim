@@ -1,5 +1,5 @@
 {
-  description = "Elyth's NeoVim configuration";
+  description = "Hobo's Copy of Elyth's NeoVim configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";

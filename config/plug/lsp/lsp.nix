@@ -24,6 +24,12 @@
         pyright = {
           enable = true;
         };
+        rust-analyzer = {
+          enable = true;
+        };
+        tsserver = {
+          enable = true;
+        };
         gopls = {
           enable = true;
         };

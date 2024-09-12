@@ -19,6 +19,9 @@
       };
     };
   };
+  filetype.extension = {
+    mdx = "mdx";
+  };
   opts = {
     # Enable relative line numbers
     number = false;

@@ -3,7 +3,7 @@
   extraPlugins = with pkgs.vimUtils; [
     (buildVimPlugin {
       pname = "mdx.nvim";
-      version = "61b93f6";
+      version = "0.0.1";
       src = pkgs.fetchFromGitHub {
         owner = "davidmh";
         repo = "mdx.nvim";

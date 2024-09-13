@@ -39,6 +39,9 @@
         yamlls = {
           enable = true;
         };
+        pylyzer = {
+          enable = true;
+        };
       };
       keymaps = {
         silent = true;

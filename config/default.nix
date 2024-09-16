@@ -51,6 +51,7 @@
     ./plug/utils/comment-box.nix
     ./plug/utils/flash.nix
     ./plug/utils/grapple.nix
+    ./plug/utils/marp-nvim.nix
     ./plug/utils/hardtime.nix
     ./plug/utils/illuminate.nix
     ./plug/utils/markview.nix

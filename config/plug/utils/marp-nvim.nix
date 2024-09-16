@@ -15,10 +15,9 @@
 
   extraConfigLua = ''
     require('marp').setup({
-      port = 8080
+      port = 8080,
       wait_for_response_timeout = 30,
       wait_for_response_delay = 1,
     })
   '';
 }
-

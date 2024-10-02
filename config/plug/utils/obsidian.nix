@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   plugins.obsidian = {
-    #    enable = lib.mkDefault false;
+    # enable = lib.mkDefault false;
     enable = true;
     settings = {
       completion = {
@@ -12,17 +12,13 @@
       workspaces = [
         {
           name = "work";
-          path = "~/obsidian/work";
-        }
-        {
-          name = "home";
-          path = "~/obsidian/home";
+          path = "~/Documents/askerra/question-notes";
         }
       ];
-      daily_notes = {
-        template = "~/obsidian/templates/daily_note_template.md";
-        folder = "~/obsidian/work/daily_notes";
-      };
+      # daily_notes = {
+      #   template = "~/obsidian/templates/daily_note_template.md";
+      #   folder = "~/obsidian/work/daily_notes";
+      # };
       mappings = {
         gf = {
           action = "require('obsidian').util.gf_passthrough";
@@ -37,7 +33,7 @@
           opts.buffer = true;
         };
       };
-      templates = {
+      /* templates = {
         subdir = "~/obsidian/templates";
         substitutions = {
           monday.__raw = ''
@@ -116,7 +112,7 @@
             end
           '';
         };
-      };
+      }; */
     };
   };
 }

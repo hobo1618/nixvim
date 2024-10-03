@@ -4,7 +4,9 @@
 
 # Nixvim config
 
-My Neovim config using nixvim.
+## Credit
+
+This project is a **clone** of [@elythh](https://github.com/elythh)'s amazing [nixvim](github:elythh/nixvim) config. I've left this README unaltered, but if you want to use this config you really should check out the [original](https://github.com/elythh/nixvim).
 
 > [!NOTE]  
 > The colorscheme in these screenshots is [paradise](https://github.com/paradise-theme/paradise)

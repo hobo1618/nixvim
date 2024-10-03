@@ -55,6 +55,7 @@
     ./plug/utils/hardtime.nix
     ./plug/utils/illuminate.nix
     ./plug/utils/markview.nix
+    ./plug/utils/markdown-preview.nix
     ./plug/utils/mini.nix
     ./plug/utils/obsidian.nix
     ./plug/utils/oil.nix

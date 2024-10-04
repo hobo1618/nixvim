@@ -7,11 +7,11 @@
         min_chars = 2;
         nvim_cmp = true;
       };
-      new_notes_location = "current_dir";
+      new_notes_location = "notes_subdir";
       workspaces = [
         {
-          name = "work";
-          path = "~/Documents/askerra/question-notes";
+          name = "sat";
+          path = "~/Documents/askerra/vault/sat";
         }
       ];
       note_id_func = ''

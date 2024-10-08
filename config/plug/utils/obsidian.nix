@@ -122,5 +122,21 @@
         desc = "Paste an image from the clipboard into the note at the cursor position by saving it to the vault and adding a markdown image link. You can configure the default folder to save images to with the attachments.img_folder option.";
       };
     }
+    {
+      mode = "n";
+      key = "<leader>ot";
+      action = "<cmd>ObsidianTags<cr>";
+      options = {
+        desc = "Search for notes by tag.";
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>of";
+      action = "<cmd>ObsidianSearch<cr>";
+      options = {
+        desc = "Search for notes by tag.";
+      };
+    }
   ];
 }

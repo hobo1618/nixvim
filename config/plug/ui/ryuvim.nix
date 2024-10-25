@@ -7,9 +7,10 @@
       src = pkgs.fetchFromGitHub {
         owner = "hobo1618";
         repo = "ryuvim";
-        rev = "2f4e1e45cf332d5f294eb95409ac3c967cf7c224";
-        hash = "sha256-T8Uyu8py8SoI9FXRsoJaSoj9Ygv6AqUqDTuzcgwRFew=";
+        rev = "9f124ac7cfc4b2a0221deaa8f8326c37b505f6e6";
+        hash = "sha256-qn2TRk/ERdhh8t86ZvlY0UbiTIFkdDcG8cutyCuekxw=";
       };
     })
   ];
 }
+

@@ -27,6 +27,7 @@
   extraPlugins = with pkgs.vimUtils; [
     (buildVimPlugin {
       pname = "marp-nvim";
+      version = "1.0";
       src = pkgs.fetchFromGitHub {
         owner = "mpas";
         repo = "marp-nvim";

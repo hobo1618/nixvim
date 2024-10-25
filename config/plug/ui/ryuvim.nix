@@ -3,7 +3,7 @@
   extraPlugins = with pkgs.vimUtils; [
     (buildVimPlugin {
       pname = "ryuvim";
-      version = "2024-04-36";
+      version = "0.1.0";
       src = pkgs.fetchFromGitHub {
         owner = "hobo1618";
         repo = "ryuvim";

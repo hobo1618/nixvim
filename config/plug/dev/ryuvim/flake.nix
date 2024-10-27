@@ -4,7 +4,8 @@
   extraFiles =
     {
       "lua/print_command.lua" = {
-        source = ../../../lua/print_command.lua;
+        source = ../../../../lua/print_command.lua;
+        # source = ../../../lua/print_command.lua;
       };
     };
 

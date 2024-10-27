@@ -38,10 +38,10 @@
 
     ./plug/ui/alpha.nix
     # ./plug/ui/btw.nix
-    ./plug/ui/ryuvim.nix
     ./plug/ui/bufferline.nix
     ./plug/ui/dressing.nix
     ./plug/ui/indent-blankline.nix
+    # ./plug/ui/ryuvim.nix
     ./plug/ui/noice.nix
     ./plug/ui/nvim-notify.nix
     #./plug/ui/precognition.nix
@@ -64,6 +64,8 @@
     ./plug/utils/undotree.nix
     ./plug/utils/whichkey.nix
     ./plug/utils/yaml-companion.nix
+
+    ./plug/dev/ryuvim/ryuvim.nix
   ];
   options = {
     theme = lib.mkOption {

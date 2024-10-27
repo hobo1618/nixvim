@@ -3,7 +3,8 @@
 
   extraFiles =
     {
-      "lua/print_command.lua" = {
+      "lua/ryudev.lua" = {
+        # source = ../../../lua/ryudev.lua;
         source = ../../../lua/print_command.lua;
       };
     };
@@ -42,7 +43,7 @@
   extraConfigLua = ''
     require('ryuvim').setup()
     -- require('ryuvim_dev')
-    require('print_command')
+    require('ryudev')
   '';
 
 }

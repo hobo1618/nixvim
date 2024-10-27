@@ -1,15 +1,11 @@
 { pkgs, ... }:
 {
+  extraFiles = {
+    # Specify the source file and its destination in Neovim’s runtime path
+    # "lua/print_command.lua".source = "./lua/print_command.lua";
+    "ftplugin/print_command.lua".text = "vim.api.nvim_create_user_command('SayHello', function() print('Hello from nixvim!') end, {}) ";
+  };
 
-  extraFiles = [
-    {
-      "ftplugin/nix.lua".text = ''
-        vim.opt.tabstop = 2
-        vim.opt.shiftwidth = 2
-        vim.opt.expandtab = true
-      '';
-    }
-  ];
 
   # extraPlugins = with pkgs.vimUtils; [
   #   (buildVimPlugin {

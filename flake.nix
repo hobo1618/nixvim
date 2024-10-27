@@ -39,9 +39,6 @@
           nvim = nixvim'.makeNixvimWithModule {
             inherit pkgs;
             module = ./config;
-            extraFiles = {
-              "print_command.lua" = "lua/print_command.lua";
-            };
           };
 
           # Adding extraFiles configuration

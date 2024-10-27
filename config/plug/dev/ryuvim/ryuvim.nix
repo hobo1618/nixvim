@@ -3,7 +3,7 @@
   extraFiles =
     {
       "lua/ryudev.lua" = {
-        source = ../../../lua/ryudev.lua;
+        source = ../../../../lua/ryudev.lua;
       };
     };
 

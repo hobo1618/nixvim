@@ -10,6 +10,10 @@
       new_notes_location = "notes_subdir";
       workspaces = [
         {
+          name = "notes";
+          path = "~/Documents/obsidian";
+        }
+        {
           name = "sat";
           path = "~/Documents/askerra/vault/sat";
         }

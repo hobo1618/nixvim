@@ -5,6 +5,12 @@
       "lua/ryuvim/init.lua" = {
         source = ./ryuvim/init.lua;
       };
+      "lua/ryuvim/utils.lua" = {
+        source = ./ryuvim/utils.lua;
+      };
+      "lua/ryuvim/commands/list.lua" = {
+        source = ./ryuvim/commands/list.lua;
+      };
     };
   # {
   #   "lua/ryuvim.lua" = {

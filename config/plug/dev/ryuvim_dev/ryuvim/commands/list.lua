@@ -6,6 +6,7 @@ function M.run()
 end
 
 function M.setup()
+	print("List command loaded!")
 	vim.api.nvim_create_user_command("FalkorList", M.run, {})
 end
 

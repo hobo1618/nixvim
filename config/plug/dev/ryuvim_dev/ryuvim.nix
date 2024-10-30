@@ -2,10 +2,15 @@
 {
   extraFiles =
     {
-      "lua/ryuvim.lua" = {
-        source = ./ryuvim/init.lua;
+      "lua/ryuvim" = {
+        source = ./ryuvim;
       };
     };
+  # {
+  #   "lua/ryuvim.lua" = {
+  #     source = ./ryuvim/init.lua;
+  #   };
+  # };
 
   # extraPlugins = with pkgs.vimUtils; [
   #   (buildVimPlugin {

@@ -18,8 +18,8 @@
     #   };
     # };
     {
-      "lua/ryuvim" = {
-        source = ./ryuvim;
+      "lua/ryuvim".module = {
+        source = ./ryuvim/init.lua;
       };
     };
 

@@ -3,7 +3,7 @@
   extraFiles =
     {
       "lua/ryudev.lua" = {
-        source = ./ryudev.lua;
+        source = ./ryudev/init.lua;
       };
     };
 

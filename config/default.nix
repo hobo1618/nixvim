@@ -65,7 +65,7 @@
     ./plug/utils/whichkey.nix
     ./plug/utils/yaml-companion.nix
 
-    ./plug/dev/ryuvim/ryuvim.nix
+    ./plug/dev/ryuvim_dev/ryuvim.nix
   ];
   options = {
     theme = lib.mkOption {

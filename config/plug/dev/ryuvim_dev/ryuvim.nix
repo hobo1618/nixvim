@@ -21,7 +21,6 @@
   # ];
 
   extraConfigLua = ''
-    -- require('ryuvim').setup()
     require('ryuvim')
   '';
 

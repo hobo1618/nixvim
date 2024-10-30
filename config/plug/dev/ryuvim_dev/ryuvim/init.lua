@@ -1,7 +1,7 @@
 local M = {}
 
 -- Load modules
-M.list = require("~/.config/nvim/lua/ryuvim.commands.list")
+M.list = require("ryuvim.commands.list")
 -- M.query = require("config.plug.dev.ryuvim_dev.ryuvim.commands.query")
 -- M.delete = require("config.plug.dev.ryuvim_dev.ryuvim.commands.delete")
 -- Load other modules similarly...

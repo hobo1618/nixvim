@@ -2,7 +2,7 @@
 {
   extraFiles =
     {
-      "lua/ryudev.lua" = {
+      "lua/ryuvim.lua" = {
         source = ./ryuvim/init.lua;
       };
     };

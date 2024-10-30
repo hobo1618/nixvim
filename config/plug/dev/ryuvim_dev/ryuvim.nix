@@ -12,13 +12,15 @@
     #     source = ./ryuvim/commands/list.lua;
     #   };
     # };
+    #
+    # This worked before modules
     # {
     #   "lua/ryuvim.lua" = {
     #     source = ./ryuvim/init.lua;
     #   };
     # };
     {
-      "lua/ryuvim".module = {
+      "lua/ryuvim/init.lua" = {
         source = ./ryuvim/init.lua;
       };
     };

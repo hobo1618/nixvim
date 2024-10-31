@@ -14,7 +14,9 @@ end
 
 vim.api.nvim_create_user_command("RyuHello", M.hello, {})
 vim.api.nvim_create_user_command("RyuDBList", db_list.run, {})
-vim.api.nvim_create_user_command("RyuDBDelete", db_delete.run, {})
+vim.api.nvim_create_user_command("RyuDBDelete", function(opts)
+	db_delete.run(opts.args)
+end, { nargs = 1 })
 
 function M.setup()
 	print("Plugin loaded!")

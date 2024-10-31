@@ -1,11 +1,13 @@
 local M = {}
 -- Mock `db_list` function for demonstration
 function M.db_list()
-	-- Replace this with the actual call to fetch the database list
-	return { "database1", "database2", "database3" }
-end
+	-- Fetch the list of databases using the function from the 'list' module
+	-- Replace 'get_databases' with the actual function name in the list module
+	local db_list = require("ryuvim.commands.list").run()
 
-local list = require("ryuvim.commands.list")
+	-- Ensure the result is a table and return it
+	return db_list or {}
+end
 
 -- Function that runs the shell command with the selected graph
 function M.run(graph)
@@ -25,11 +27,11 @@ end
 
 -- Function to show the list and let the user select a database
 function M.delete_graph()
-	-- local databases = M.db_list()
+	local databases = M.db_list()
 
 	-- print(list.run())
 
-	local databases = list.run()
+	-- local databases = list.run()
 
 	-- Use `vim.ui.select` to present a menu
 	vim.ui.select(databases, { prompt = "Select a database to delete:" }, function(selected)

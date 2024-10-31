@@ -11,6 +11,9 @@
       "lua/ryuvim/commands/list.lua" = {
         source = ./ryuvim/commands/list.lua;
       };
+      "lua/ryuvim/commands/delete.lua" = {
+        source = ./ryuvim/commands/delete.lua;
+      };
     };
   #
   # This worked before modules

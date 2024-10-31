@@ -1,29 +1,29 @@
 { pkgs, ... }:
 {
   extraFiles =
-    # {
-    #   "lua/ryuvim/init.lua" = {
-    #     source = ./ryuvim/init.lua;
-    #   };
-    #   "lua/ryuvim/utils.lua" = {
-    #     source = ./ryuvim/utils.lua;
-    #   };
-    #   "lua/ryuvim/commands/list.lua" = {
-    #     source = ./ryuvim/commands/list.lua;
-    #   };
-    # };
-    #
-    # This worked before modules
-    # {
-    #   "lua/ryuvim.lua" = {
-    #     source = ./ryuvim/init.lua;
-    #   };
-    # };
     {
       "lua/ryuvim/init.lua" = {
         source = ./ryuvim/init.lua;
       };
+      "lua/ryuvim/utils.lua" = {
+        source = ./ryuvim/utils.lua;
+      };
+      "lua/ryuvim/commands/list.lua" = {
+        source = ./ryuvim/commands/list.lua;
+      };
     };
+  #
+  # This worked before modules
+  # {
+  #   "lua/ryuvim.lua" = {
+  #     source = ./ryuvim/init.lua;
+  #   };
+  # };
+  # {
+  #   "lua/ryuvim/init.lua" = {
+  #     source = ./ryuvim/init.lua;
+  #   };
+  # };
 
   # extraPlugins = with pkgs.vimUtils; [
   #   (buildVimPlugin {

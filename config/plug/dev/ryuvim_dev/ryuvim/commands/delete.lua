@@ -25,12 +25,11 @@ end
 
 -- Function to show the list and let the user select a database
 function M.delete_graph()
-	local databases = M.db_list()
+	-- local databases = M.db_list()
 
-	print(list.run())
+	-- print(list.run())
 
-	local dbs = list.run()
-	print(dbs)
+	local databases = list.run()
 
 	-- Use `vim.ui.select` to present a menu
 	vim.ui.select(databases, { prompt = "Select a database to delete:" }, function(selected)

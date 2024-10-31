@@ -27,7 +27,9 @@ end
 function M.delete_graph()
 	local databases = M.db_list()
 
-	local dbs = require("ryuvim.commands.list").db_list()
+	print(list.run())
+
+	local dbs = list.run()
 	print(dbs)
 
 	-- Use `vim.ui.select` to present a menu

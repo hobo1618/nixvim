@@ -25,9 +25,10 @@ end
 
 -- Function to show the list and let the user select a database
 function M.delete_graph()
-	-- local databases = M.db_list()
+	local databases = M.db_list()
 
-	local databases = require("ryuvim.commands.list").db_list()
+	local dbs = require("ryuvim.commands.list").db_list()
+	print(dbs)
 
 	-- Use `vim.ui.select` to present a menu
 	vim.ui.select(databases, { prompt = "Select a database to delete:" }, function(selected)

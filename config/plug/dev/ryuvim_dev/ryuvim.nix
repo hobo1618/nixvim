@@ -40,6 +40,8 @@
 
   extraConfigLua = ''
     require('ryuvim')
+    require('ryuvim/utils')
+    require('ryuvim/commands/list')
   '';
 
 }

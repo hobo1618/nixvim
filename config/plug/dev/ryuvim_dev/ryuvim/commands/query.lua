@@ -34,6 +34,8 @@ function M.run_query()
 			return
 		end
 
+		print(query)
+
 		-- Run the query
 		local result = M.query(selected_db, query)
 		require("ryuvim.utils").show_in_float("Query Result:\n" .. result)

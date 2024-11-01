@@ -3,6 +3,7 @@ local M = {}
 -- Load modules
 local db_list = require("ryuvim.commands.list")
 local db_delete = require("ryuvim.commands.delete")
+local db_query = require("ryuvim.commands.query")
 -- M.list = require("ryuvim.commands.list")
 -- M.query = require("config.plug.dev.ryuvim_dev.ryuvim.commands.query")
 -- M.delete = require("config.plug.dev.ryuvim_dev.ryuvim.commands.delete")
@@ -13,7 +14,26 @@ function M.hello()
 end
 
 vim.api.nvim_create_user_command("RyuHello", M.hello, {})
-vim.api.nvim_create_user_command("RyuDBList", db_list.run, {})
+vim.api.nvim_create_user_command("RyuDBQuery", function()
+	db_query.query("askerra", "MATCH (n) RETURN n", 1000)
+end, {})
+vim.api.nvim_create_user_command("RyuDBList", function()
+	local dbs = db_list.run()
+	if #dbs == 0 then
+		print("No databases found.")
+		return
+	end
+
+	-- Print each database name
+	--
+	local content = { "List of Databases:" }
+	print()
+	for _, db in ipairs(dbs) do
+		-- print("- " .. db)
+		table.insert(content, "- " .. db)
+	end
+	require("ryuvim.utils").show_in_float(table.concat(content, "\n"))
+end, {})
 vim.api.nvim_create_user_command("RyuDBDelete", function()
 	db_delete.delete_graph()
 end, {})

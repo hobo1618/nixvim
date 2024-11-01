@@ -12,7 +12,7 @@
         source = ./ryuvim/commands/list.lua;
       };
       "lua/ryuvim/commands/query.lua" = {
-        source = ./ryuvim/commands/list.lua;
+        source = ./ryuvim/commands/query.lua;
       };
       "lua/ryuvim/commands/delete.lua" = {
         source = ./ryuvim/commands/delete.lua;

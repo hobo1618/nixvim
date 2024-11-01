@@ -15,16 +15,6 @@ function M.query(graph_name, query, timeout)
 	return result
 end
 
--- Function to check if a database exists in the list
-local function db_exists(db_name, db_list)
-	for _, db in ipairs(db_list) do
-		if db == db_name then
-			return true
-		end
-	end
-	return false
-end
-
 -- Function to select a database and then run a query
 function M.run_query()
 	local db_list = require("ryuvim.commands.list").run() -- Fetch the list of databases

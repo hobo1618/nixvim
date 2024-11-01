@@ -31,7 +31,7 @@ function M.run_query()
 
 	-- Show a selection menu for the databases
 	vim.ui.select(db_list, { prompt = "Select a database:" }, function(selected_db)
-		if not selected_db or selected_db == "" then
+		if selected_db == "" then
 			print("No database selected. Operation cancelled.")
 			return
 		end

@@ -1,4 +1,3 @@
--- graph_query.lua
 local M = {}
 
 -- Function to execute GRAPH.QUERY
@@ -25,27 +24,26 @@ local function db_exists(db_name, db_list)
 	return false
 end
 
--- Function to select a database and then run a query
+-- Function to select or input a database and then run a query
 function M.run_query()
 	local db_list = require("ryuvim.commands.list").run() -- Fetch the list of databases
 
-	-- Show a selection menu for the databases
-	vim.ui.select(db_list, { prompt = "Select a database:" }, function(selected_db)
-		print(selected_db)
-		if not selected_db or selected_db == "" then
+	-- Prompt the user to enter or select a database
+	vim.ui.input({ prompt = "Enter or select a database (press Tab to see options):" }, function(input_db)
+		if not input_db or input_db == "" then
 			print("No database selected. Operation cancelled.")
 			return
 		end
 
-		-- Check if the database exists after the selection
-		if not db_exists(selected_db, db_list) then
+		-- Check if the database exists
+		if not db_exists(input_db, db_list) then
 			local choice = vim.fn.confirm(
-				"The database '" .. selected_db .. "' does not exist. Do you want to create it?",
+				"The database '" .. input_db .. "' does not exist. Do you want to create it?",
 				"&Yes\n&No",
 				2
 			)
 
-			if choice == 0 then
+			if choice == 2 then -- User chose "No"
 				print("Operation aborted.")
 				return
 			end
@@ -60,9 +58,12 @@ function M.run_query()
 		end
 
 		-- Run the query
-		local result = M.query(selected_db, query)
+		local result = M.query(input_db, query)
 		require("ryuvim.utils").show_in_float("Query Result:\n" .. result)
 	end)
+
+	-- Show a list of options for reference (using vim.ui.select)
+	vim.ui.select(db_list, { prompt = "Available databases for reference:" }, function(_) end)
 end
 
 return M

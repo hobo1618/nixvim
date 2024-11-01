@@ -13,10 +13,7 @@ function M.hello()
 	print("Hello from my plugin!")
 end
 
-vim.api.nvim_create_user_command("RyuHello", M.hello, {})
-vim.api.nvim_create_user_command("RyuDBQuery", function()
-	db_query.query("askerra", "MATCH (n) RETURN n", 1000)
-end, {})
+vim.api.nvim_create_user_command("RyuDBQuery", db_query.run_query, {})
 vim.api.nvim_create_user_command("RyuDBList", function()
 	local dbs = db_list.run()
 	if #dbs == 0 then

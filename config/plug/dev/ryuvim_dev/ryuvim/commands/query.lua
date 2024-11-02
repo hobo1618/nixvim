@@ -39,8 +39,8 @@ function M.run_query()
 			return
 		end
 
+		-- If the user selects "Create New", prompt for a new database name
 		if selected_db == "Create New" then
-			-- Prompt the user to enter a new database name
 			vim.ui.input({ prompt = "Enter a name for the new database:" }, function(new_db_name)
 				if not new_db_name or new_db_name == "" then
 					print("No database name entered. Operation cancelled.")
@@ -55,20 +55,30 @@ function M.run_query()
 
 				-- Use the new database name for the query
 				selected_db = new_db_name
+
+				-- Now prompt the user to enter the query
+				local query = vim.fn.input("Enter your query: ")
+				if query == "" then
+					print("No query entered. Operation cancelled.")
+					return
+				end
+
+				-- Run the query (which will create the database if it doesn't exist)
+				local result = M.query(selected_db, query)
+				require("ryuvim.utils").show_in_float("Query Result:\n" .. result)
 			end)
+		else
+			-- If the user selects an existing database, prompt for the query immediately
+			local query = vim.fn.input("Enter your query: ")
+			if query == "" then
+				print("No query entered. Operation cancelled.")
+				return
+			end
+
+			-- Run the query
+			local result = M.query(selected_db, query)
+			require("ryuvim.utils").show_in_float("Query Result:\n" .. result)
 		end
-
-		-- Prompt the user to enter the query
-		local query = vim.fn.input("Enter your query: ")
-
-		if query == "" then
-			print("No query entered. Operation cancelled.")
-			return
-		end
-
-		-- Run the query
-		local result = M.query(selected_db, query)
-		require("ryuvim.utils").show_in_float("Query Result:\n" .. result)
 	end)
 end
 

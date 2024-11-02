@@ -15,15 +15,47 @@ function M.query(graph_name, query, timeout)
 	return result
 end
 
+-- Function to check if a database exists in the list
+local function db_exists(db_name, db_list)
+	for _, db in ipairs(db_list) do
+		if db == db_name then
+			return true
+		end
+	end
+	return false
+end
+
 -- Function to select a database and then run a query
 function M.run_query()
 	local db_list = require("ryuvim.commands.list").run() -- Fetch the list of databases
+
+	-- Append "Create New" to the list of databases
+	table.insert(db_list, "Create New")
 
 	-- Show a selection menu for the databases
 	vim.ui.select(db_list, { prompt = "Select a database:" }, function(selected_db)
 		if not selected_db then
 			print("No database selected. Operation cancelled.")
 			return
+		end
+
+		if selected_db == "Create New" then
+			-- Prompt the user to enter a new database name
+			vim.ui.input({ prompt = "Enter a name for the new database:" }, function(new_db_name)
+				if not new_db_name or new_db_name == "" then
+					print("No database name entered. Operation cancelled.")
+					return
+				end
+
+				-- Check if the new database name already exists
+				if db_exists(new_db_name, db_list) then
+					print("The database name '" .. new_db_name .. "' already exists. Operation cancelled.")
+					return
+				end
+
+				-- Use the new database name for the query
+				selected_db = new_db_name
+			end)
 		end
 
 		-- Prompt the user to enter the query
@@ -33,8 +65,6 @@ function M.run_query()
 			print("No query entered. Operation cancelled.")
 			return
 		end
-
-		print(query)
 
 		-- Run the query
 		local result = M.query(selected_db, query)

@@ -1,5 +1,5 @@
 local M = {}
-local openai = require("openai") -- Import the openai module
+local openai = require("ryuvim.openai") -- Import the openai module
 
 function M.run_shell(cmd)
 	local handle = io.popen(cmd)

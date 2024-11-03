@@ -66,7 +66,7 @@ function M.show_in_float(content)
 			end
 
 			-- Replace 'your_api_key_here' with your actual OpenAI API key
-			local api_key = "your_api_key_here"
+			local api_key = os.getenv("OPENAI_API_KEY")
 			local response = openai.send_message(api_key, message, content)
 
 			if response then

@@ -32,6 +32,7 @@ function M.send_message(api_key, message, context)
 	if response and response.status == 200 then
 		-- Parse the response JSON and return the content
 		local response_json = vim.fn.json_decode(response.body)
+		print(vim.inspect(response_json))
 		return response_json.choices[1].message.content
 	else
 		print("Error: " .. (response.status or "Unknown error"))

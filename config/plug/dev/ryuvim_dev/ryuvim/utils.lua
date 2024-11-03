@@ -16,6 +16,7 @@ function M.show_in_float(content)
 	local lines = {
 		"[Press 's' to save output to a file]",
 		"[Press 'q' to close this window]",
+		"[Press 'c' to open chat with context]",
 		"----------------------------------", -- Separator line
 	}
 	vim.list_extend(lines, vim.split(content, "\n"))
@@ -62,9 +63,30 @@ function M.show_in_float(content)
 		end)
 	end
 
+	-- Function to handle chat input and use content as context
+	local function open_chat()
+		-- Prompt the user to add a message
+		vim.ui.input({ prompt = "Enter your message: " }, function(message)
+			if not message or message == "" then
+				print("No message provided. Operation cancelled.")
+				return
+			end
+
+			-- Here, you would send the message and the content as context to the LLM
+			-- For demonstration, we'll just print what would be sent
+			print("Message: " .. message)
+			print("Context: " .. content)
+
+			-- You can replace the above with an actual call to the LLM API
+			-- For example:
+			-- send_to_llm_api({ context = content, message = message })
+		end)
+	end
+
 	-- Set keybindings for the floating window
 	vim.api.nvim_buf_set_keymap(buf, "n", "q", "", { noremap = true, silent = true, callback = close_window })
 	vim.api.nvim_buf_set_keymap(buf, "n", "s", "", { noremap = true, silent = true, callback = save_to_file })
+	vim.api.nvim_buf_set_keymap(buf, "n", "c", "", { noremap = true, silent = true, callback = open_chat })
 end
 
 return M

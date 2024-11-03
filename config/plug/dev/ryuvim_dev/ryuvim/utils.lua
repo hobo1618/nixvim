@@ -7,11 +7,21 @@ function M.run_shell(cmd)
 	return result
 end
 
--- Utility for displaying output in a floating window with actions
+-- Utility for displaying output in a floating window with visible actions
 function M.show_in_float(content)
 	-- Create a new buffer
 	local buf = vim.api.nvim_create_buf(false, true) -- (false, true) makes it non-listed and scratch
-	vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(content, "\n"))
+
+	-- Prepare the lines to display, including the action shortcuts
+	local lines = {
+		"[Press 's' to save output to a file]",
+		"[Press 'q' to close this window]",
+		"----------------------------------", -- Separator line
+	}
+	vim.list_extend(lines, vim.split(content, "\n"))
+
+	-- Set the lines in the buffer
+	vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 
 	-- Create the floating window
 	local width = math.floor(vim.o.columns * 0.8)
@@ -55,13 +65,6 @@ function M.show_in_float(content)
 	-- Set keybindings for the floating window
 	vim.api.nvim_buf_set_keymap(buf, "n", "q", "", { noremap = true, silent = true, callback = close_window })
 	vim.api.nvim_buf_set_keymap(buf, "n", "s", "", { noremap = true, silent = true, callback = save_to_file })
-
-	-- Provide instructions to the user
-	vim.api.nvim_buf_set_lines(buf, -1, -1, false, {
-		"",
-		"[Press 's' to save output to a file]",
-		"[Press 'q' to close this window]",
-	})
 end
 
 return M

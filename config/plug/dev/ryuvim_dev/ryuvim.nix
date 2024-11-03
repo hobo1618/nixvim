@@ -17,6 +17,9 @@
       "lua/ryuvim/commands/delete.lua" = {
         source = ./ryuvim/commands/delete.lua;
       };
+      "lua/ryuvim/openai.lua" = {
+        source = ./ryuvim/openai.lua;
+      };
     };
   #
   # This worked before modules
@@ -48,6 +51,7 @@
     require('ryuvim')
     require('ryuvim/utils')
     require('ryuvim/commands/list')
+    require('ryuvim/openai')
   '';
 
 }

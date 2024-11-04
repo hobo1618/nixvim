@@ -19,7 +19,7 @@ local function generate_embedding_async(description, callback)
 	local body = {
 		model = "text-embedding-3-small",
 		input = description,
-		dimensions = 768,
+		dimensions = 1536,
 	}
 
 	local json_body = vim.fn.json_encode(body)

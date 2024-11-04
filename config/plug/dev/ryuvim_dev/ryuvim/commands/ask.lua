@@ -17,9 +17,9 @@ local function generate_embedding_async(description, callback)
 	}
 
 	local body = {
-		model = "text-embedding-ada-002",
+		model = "text-embedding-3-small",
 		input = description,
-		encoding_format = "float",
+		dimensions = 768,
 	}
 
 	local json_body = vim.fn.json_encode(body)
@@ -51,7 +51,7 @@ local function execute_query(embedding, user_input)
 
 	-- Construct the Cypher query
 	local query = string.format(
-		"CALL db.idx.vector.queryNodes('%s', '%s', %d, vecf32(%s)) YIELD node, score",
+		"CALL db.idx.vector.queryNodes('%s', '%s', %d, vecf32(%s)) YIELD node, score RETURN node.content, score",
 		user_input.label,
 		user_input.attribute,
 		user_input.limit,

@@ -20,6 +20,9 @@
       "lua/ryuvim/openai.lua" = {
         source = ./ryuvim/openai.lua;
       };
+      "lua/ryuvim/commands/ask.lua" = {
+        source = ./ryuvim/commands/ask.lua;
+      };
     };
   #
   # This worked before modules

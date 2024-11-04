@@ -46,11 +46,11 @@ end
 -- Function to execute the query using the embedding and user inputs
 local function execute_query(embedding, user_input)
 	-- Convert the embedding to a format acceptable by FalkorDB (e.g., vecf32)
-	local embedding_str = "vecf32(" .. table.concat(embedding, ", ") .. ")"
+	local embedding_str = "[" .. table.concat(embedding, ", ") .. "]"
 
 	-- Construct the Cypher query
 	local query = string.format(
-		"CALL db.idx.vector.queryNodes('%s', '%s', %d, %s) YIELD node, score",
+		"CALL db.idx.vector.queryNodes('%s', '%s', %d, vecf32(%s)) YIELD node, score",
 		user_input.label,
 		user_input.attribute,
 		user_input.limit,

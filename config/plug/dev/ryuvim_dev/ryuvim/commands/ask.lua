@@ -2,6 +2,7 @@ local M = {}
 local curl = require("plenary.curl")
 
 -- Function to generate the embedding asynchronously
+-- Function to generate the embedding asynchronously
 local function generate_embedding_async(description, callback)
 	-- Retrieve the API key from the environment variable
 	local api_key = os.getenv("OPENAI_API_KEY")
@@ -32,7 +33,8 @@ local function generate_embedding_async(description, callback)
 		body = json_body,
 		callback = function(response)
 			if response and response.status == 200 then
-				local response_json = vim.fn.json_decode(response.body)
+				-- Use vim.json.decode instead of vim.fn.json_decode
+				local response_json = vim.json.decode(response.body)
 				local embedding = response_json.data[1].embedding
 				callback(embedding)
 			else

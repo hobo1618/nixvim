@@ -14,7 +14,7 @@ function M.hello()
 	print("Hello from my plugin!")
 end
 
-vim.api.nvim_create_user_command("RyuAsk", db_ask.open_query_input, {})
+vim.api.nvim_create_user_command("RyuAsk", db_ask.RyuAsk, {})
 vim.api.nvim_create_user_command("RyuQuery", db_query.run_query, {})
 vim.api.nvim_create_user_command("RyuList", function()
 	local dbs = db_list.run()

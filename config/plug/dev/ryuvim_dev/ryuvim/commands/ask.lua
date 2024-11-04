@@ -3,30 +3,25 @@ local curl = require("plenary.curl")
 
 -- Function to generate the embedding asynchronously
 local function generate_embedding_async(description, callback)
-	-- Retrieve the API key from the environment variable
 	local api_key = os.getenv("OPENAI_API_KEY")
 	if not api_key then
 		print("Error: OPENAI_API_KEY environment variable not set.")
 		return
 	end
 
-	-- Prepare the API endpoint and headers
 	local url = "https://api.openai.com/v1/embeddings"
 	local headers = {
 		["Content-Type"] = "application/json",
 		["Authorization"] = "Bearer " .. api_key,
 	}
 
-	-- Prepare the body of the request
 	local body = {
-		model = "text-embedding-ada-002", -- Example embedding model
+		model = "text-embedding-ada-002",
 		input = description,
 	}
 
-	-- Convert the body to a JSON string
 	local json_body = vim.fn.json_encode(body)
 
-	-- Send the request using Plenary's curl asynchronously
 	curl.post(url, {
 		headers = headers,
 		body = json_body,
@@ -34,8 +29,6 @@ local function generate_embedding_async(description, callback)
 			if response and response.status == 200 then
 				local response_json = vim.json.decode(response.body)
 				local embedding = response_json.data[1].embedding
-
-				-- Schedule the callback to run in the main event loop
 				vim.schedule(function()
 					callback(embedding)
 				end)
@@ -51,10 +44,8 @@ end
 
 -- Function to open the form for label, attribute, and limit input
 function M.open_form_for_query(embedding)
-	-- Use vim.schedule to ensure UI-related code runs in the main event loop
 	vim.schedule(function()
-		-- Create a new buffer
-		local buf = vim.api.nvim_create_buf(false, true)
+		local buf = vim.api.nvim_create_buf(true, true) -- Make it a listed buffer
 		local width = math.floor(vim.o.columns * 0.5)
 		local height = 7
 		local win = vim.api.nvim_open_win(buf, true, {
@@ -67,7 +58,6 @@ function M.open_form_for_query(embedding)
 			border = "single",
 		})
 
-		-- Set buffer content with input field labels
 		local lines = {
 			"Enter details for your query:",
 			"label: ",
@@ -77,20 +67,22 @@ function M.open_form_for_query(embedding)
 		}
 		vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 
-		-- Table to store user input
 		local user_input = { label = "", attribute = "", limit = "" }
 
-		-- Function to handle user input submission
 		local function on_submit()
-			-- Get the values entered by the user
 			user_input.label = vim.api.nvim_buf_get_lines(buf, 1, 2, false)[1]:gsub("label: ", "")
 			user_input.attribute = vim.api.nvim_buf_get_lines(buf, 2, 3, false)[1]:gsub("attribute: ", "")
-			user_input.limit = tonumber(vim.api.nvim_buf_get_lines(buf, 3, 4, false)[1]:gsub("limit to: ", ""))
 
-			-- Close the floating window
+			local limit_str = vim.api.nvim_buf_get_lines(buf, 3, 4, false)[1]:gsub("limit to: ", "")
+			user_input.limit = tonumber(limit_str)
+
+			if not user_input.limit then
+				print("Error: 'limit to' must be a valid integer.")
+				return
+			end
+
 			vim.api.nvim_win_close(win, true)
 
-			-- Print the results (later, you'll execute the query)
 			if embedding then
 				print("Embedding: ", table.concat(embedding, ", "))
 				print("Label: ", user_input.label)
@@ -101,7 +93,6 @@ function M.open_form_for_query(embedding)
 			end
 		end
 
-		-- Set keybinding for <Enter> to submit the form
 		vim.api.nvim_buf_set_keymap(buf, "i", "<CR>", "", {
 			noremap = true,
 			silent = true,
@@ -110,10 +101,8 @@ function M.open_form_for_query(embedding)
 	end)
 end
 
--- User command to open the query input and form
 function M.RyuAsk()
-	-- Open the input buffer for the natural language query
-	local buf = vim.api.nvim_create_buf(false, true)
+	local buf = vim.api.nvim_create_buf(true, true) -- Make it a listed buffer
 	local width = math.floor(vim.o.columns * 0.8)
 	local height = math.floor(vim.o.lines * 0.3)
 	local win = vim.api.nvim_open_win(buf, true, {
@@ -126,34 +115,26 @@ function M.RyuAsk()
 		border = "single",
 	})
 
-	-- Set buffer options
 	vim.api.nvim_buf_set_option(buf, "buftype", "prompt")
 	vim.fn.prompt_setprompt(buf, "Describe your query: ")
 
-	-- Function to handle the user's query description
 	local function on_query_submit()
-		-- Get the content from the buffer
 		local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
 		local user_query = table.concat(lines, "\n")
 
-		-- Close the floating window
 		vim.api.nvim_win_close(win, true)
 
-		-- Generate the embedding asynchronously
 		generate_embedding_async(user_query, function(embedding)
-			-- Open the form once the embedding is ready
 			M.open_form_for_query(embedding)
 		end)
 	end
 
-	-- Set keybinding for <Enter> to submit the query
 	vim.api.nvim_buf_set_keymap(buf, "i", "<CR>", "", {
 		noremap = true,
 		silent = true,
 		callback = on_query_submit,
 	})
 
-	-- Set keybinding for <Esc> to close the floating window without submitting
 	vim.api.nvim_buf_set_keymap(buf, "i", "<Esc>", "", {
 		noremap = true,
 		silent = true,
@@ -163,7 +144,6 @@ function M.RyuAsk()
 	})
 end
 
--- Create the RyuAsk user command
 vim.api.nvim_create_user_command("RyuAsk", M.RyuAsk, {})
 
 return M

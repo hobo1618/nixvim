@@ -42,67 +42,52 @@ local function generate_embedding_async(description, callback)
 	})
 end
 
--- Function to open the form for label, attribute, and limit input
-function M.open_form_for_query(embedding)
-	vim.schedule(function()
-		local buf = vim.api.nvim_create_buf(true, true) -- Make it a listed buffer
-		local width = math.floor(vim.o.columns * 0.5)
-		local height = 7
-		local win = vim.api.nvim_open_win(buf, true, {
-			relative = "editor",
-			width = width,
-			height = height,
-			row = math.floor((vim.o.lines - height) / 2),
-			col = math.floor((vim.o.columns - width) / 2),
-			style = "minimal",
-			border = "single",
-		})
+-- Function to open sequential input fields using vim.ui.input
+function M.open_input_fields(embedding)
+	local user_input = {}
 
-		local lines = {
-			"Enter details for your query:",
-			"label: ",
-			"attribute: ",
-			"limit to: ",
-			"[Press Enter to submit]",
-		}
-		vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+	-- First input: label
+	vim.ui.input({ prompt = "Enter label: " }, function(label)
+		if not label then
+			print("Input cancelled.")
+			return
+		end
+		user_input.label = label
 
-		local user_input = { label = "", attribute = "", limit = "" }
-
-		local function on_submit()
-			user_input.label = vim.api.nvim_buf_get_lines(buf, 1, 2, false)[1]:gsub("label: ", "")
-			user_input.attribute = vim.api.nvim_buf_get_lines(buf, 2, 3, false)[1]:gsub("attribute: ", "")
-
-			local limit_str = vim.api.nvim_buf_get_lines(buf, 3, 4, false)[1]:gsub("limit to: ", "")
-			user_input.limit = tonumber(limit_str)
-
-			if not user_input.limit then
-				print("Error: 'limit to' must be a valid integer.")
+		-- Second input: attribute
+		vim.ui.input({ prompt = "Enter attribute: " }, function(attribute)
+			if not attribute then
+				print("Input cancelled.")
 				return
 			end
+			user_input.attribute = attribute
 
-			vim.api.nvim_win_close(win, true)
+			-- Third input: limit
+			vim.ui.input({ prompt = "Enter limit (integer): " }, function(limit_str)
+				local limit = tonumber(limit_str)
+				if not limit then
+					print("Error: Limit must be a valid integer.")
+					return
+				end
+				user_input.limit = limit
 
-			if embedding then
-				print("Embedding: ", table.concat(embedding, ", "))
-				print("Label: ", user_input.label)
-				print("Attribute: ", user_input.attribute)
-				print("Limit: ", user_input.limit)
-			else
-				print("Error: Embedding generation failed.")
-			end
-		end
-
-		vim.api.nvim_buf_set_keymap(buf, "i", "<CR>", "", {
-			noremap = true,
-			silent = true,
-			callback = on_submit,
-		})
+				-- Print the results (or execute your query logic)
+				if embedding then
+					print("Embedding: ", table.concat(embedding, ", "))
+					print("Label: ", user_input.label)
+					print("Attribute: ", user_input.attribute)
+					print("Limit: ", user_input.limit)
+				else
+					print("Error: Embedding generation failed.")
+				end
+			end)
+		end)
 	end)
 end
 
+-- User command to open the query input and form
 function M.RyuAsk()
-	local buf = vim.api.nvim_create_buf(true, true) -- Make it a listed buffer
+	local buf = vim.api.nvim_create_buf(false, true)
 	local width = math.floor(vim.o.columns * 0.8)
 	local height = math.floor(vim.o.lines * 0.3)
 	local win = vim.api.nvim_open_win(buf, true, {
@@ -125,7 +110,7 @@ function M.RyuAsk()
 		vim.api.nvim_win_close(win, true)
 
 		generate_embedding_async(user_query, function(embedding)
-			M.open_form_for_query(embedding)
+			M.open_input_fields(embedding)
 		end)
 	end
 

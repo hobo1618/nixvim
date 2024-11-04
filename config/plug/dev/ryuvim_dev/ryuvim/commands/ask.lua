@@ -60,14 +60,7 @@ local function execute_query(embedding, user_input)
 	-- For now, we'll just print the query
 	print("Generated Cypher Query: " .. query)
 
-	-- local result = db_query.query("askera", query, 20)
-
-	-- Here, you would execute the query using your database client
-	-- Example (this part depends on your setup):
-	-- local result = your_database_client.run_query(query)
-	-- print("Query Results: ", result)
-
-	-- For demonstration purposes, we're just printing the query
+	db_query.run_query(query)
 end
 
 -- Function to open sequential input fields using vim.ui.input

@@ -1,4 +1,3 @@
--- graph_query.lua
 local M = {}
 
 -- Function to execute GRAPH.QUERY
@@ -26,7 +25,7 @@ local function db_exists(db_name, db_list)
 end
 
 -- Function to select a database and then run a query
-function M.run_query()
+function M.run_query(optional_query)
 	local db_list = require("ryuvim.commands.list").run() -- Fetch the list of databases
 
 	-- Append "Create New" to the list of databases
@@ -56,8 +55,8 @@ function M.run_query()
 				-- Use the new database name for the query
 				selected_db = new_db_name
 
-				-- Now prompt the user to enter the query
-				local query = vim.fn.input("Enter your query: ")
+				-- Use the provided query if it exists, otherwise prompt the user for a query
+				local query = optional_query or vim.fn.input("Enter your query: ")
 				if query == "" then
 					print("No query entered. Operation cancelled.")
 					return
@@ -68,8 +67,8 @@ function M.run_query()
 				require("ryuvim.utils").show_in_float("Query Result:\n" .. result)
 			end)
 		else
-			-- If the user selects an existing database, prompt for the query immediately
-			local query = vim.fn.input("Enter your query: ")
+			-- If the user selects an existing database, use the provided query or prompt for one
+			local query = optional_query or vim.fn.input("Enter your query: ")
 			if query == "" then
 				print("No query entered. Operation cancelled.")
 				return

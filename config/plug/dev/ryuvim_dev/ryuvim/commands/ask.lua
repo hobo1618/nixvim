@@ -1,5 +1,6 @@
 local M = {}
 local curl = require("plenary.curl")
+local db_query = require("ryuvim.commands.query")
 
 -- Function to generate the embedding asynchronously
 local function generate_embedding_async(description, callback)
@@ -42,6 +43,33 @@ local function generate_embedding_async(description, callback)
 	})
 end
 
+-- Function to execute the query using the embedding and user inputs
+local function execute_query(embedding, user_input)
+	-- Convert the embedding to a format acceptable by FalkorDB (e.g., vecf32)
+	local embedding_str = "vecf32(" .. table.concat(embedding, ", ") .. ")"
+
+	-- Construct the Cypher query
+	local query = string.format(
+		"CALL db.idx.vector.queryNodes('%s', '%s', %d, %s) YIELD node, score",
+		user_input.label,
+		user_input.attribute,
+		user_input.limit,
+		embedding_str
+	)
+
+	-- For now, we'll just print the query
+	print("Generated Cypher Query: " .. query)
+
+	-- local result = db_query.query("askera", query, 20)
+
+	-- Here, you would execute the query using your database client
+	-- Example (this part depends on your setup):
+	-- local result = your_database_client.run_query(query)
+	-- print("Query Results: ", result)
+
+	-- For demonstration purposes, we're just printing the query
+end
+
 -- Function to open sequential input fields using vim.ui.input
 function M.open_input_fields(embedding)
 	local user_input = {}
@@ -71,12 +99,9 @@ function M.open_input_fields(embedding)
 				end
 				user_input.limit = limit
 
-				-- Print the results (or execute your query logic)
+				-- Execute the query with the embedding and user inputs
 				if embedding then
-					print("Embedding: ", table.concat(embedding, ", "))
-					print("Label: ", user_input.label)
-					print("Attribute: ", user_input.attribute)
-					print("Limit: ", user_input.limit)
+					execute_query(embedding, user_input)
 				else
 					print("Error: Embedding generation failed.")
 				end

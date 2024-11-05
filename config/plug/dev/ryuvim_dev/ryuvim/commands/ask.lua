@@ -45,10 +45,7 @@ end
 
 -- Function to execute the query using the embedding and user inputs
 local function execute_query(embedding, user_input)
-	-- Convert the embedding to a format acceptable by FalkorDB (e.g., vecf32)
 	local embedding_str = "[" .. table.concat(embedding, ", ") .. "]"
-
-	-- Construct the Cypher query
 	local query = string.format(
 		"CALL db.idx.vector.queryNodes('%s', '%s', %d, vecf32(%s)) YIELD node, score RETURN node.content, score",
 		user_input.label,
@@ -56,10 +53,7 @@ local function execute_query(embedding, user_input)
 		user_input.limit,
 		embedding_str
 	)
-
-	-- For now, we'll just print the query
 	print("Generated Cypher Query: " .. query)
-
 	db_query.run_query(query)
 end
 
@@ -67,7 +61,6 @@ end
 function M.open_input_fields(embedding)
 	local user_input = {}
 
-	-- First input: label
 	vim.ui.input({ prompt = "Enter label: " }, function(label)
 		if not label then
 			print("Input cancelled.")
@@ -75,7 +68,6 @@ function M.open_input_fields(embedding)
 		end
 		user_input.label = label
 
-		-- Second input: attribute
 		vim.ui.input({ prompt = "Enter attribute: " }, function(attribute)
 			if not attribute then
 				print("Input cancelled.")
@@ -83,7 +75,6 @@ function M.open_input_fields(embedding)
 			end
 			user_input.attribute = attribute
 
-			-- Third input: limit
 			vim.ui.input({ prompt = "Enter limit (integer): " }, function(limit_str)
 				local limit = tonumber(limit_str)
 				if not limit then
@@ -92,7 +83,6 @@ function M.open_input_fields(embedding)
 				end
 				user_input.limit = limit
 
-				-- Execute the query with the embedding and user inputs
 				if embedding then
 					execute_query(embedding, user_input)
 				else
@@ -121,11 +111,20 @@ function M.RyuAsk()
 	vim.api.nvim_buf_set_option(buf, "buftype", "prompt")
 	vim.fn.prompt_setprompt(buf, "Describe your query: ")
 
+	local function close_window_and_buffer()
+		if vim.api.nvim_win_is_valid(win) then
+			vim.api.nvim_win_close(win, true)
+		end
+		if vim.api.nvim_buf_is_valid(buf) then
+			vim.api.nvim_buf_delete(buf, { force = true })
+		end
+	end
+
 	local function on_query_submit()
 		local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
 		local user_query = table.concat(lines, "\n")
 
-		vim.api.nvim_win_close(win, true)
+		close_window_and_buffer()
 
 		generate_embedding_async(user_query, function(embedding)
 			M.open_input_fields(embedding)
@@ -141,9 +140,7 @@ function M.RyuAsk()
 	vim.api.nvim_buf_set_keymap(buf, "i", "<Esc>", "", {
 		noremap = true,
 		silent = true,
-		callback = function()
-			vim.api.nvim_win_close(win, true)
-		end,
+		callback = close_window_and_buffer,
 	})
 end
 

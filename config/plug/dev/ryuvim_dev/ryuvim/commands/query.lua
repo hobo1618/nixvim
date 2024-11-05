@@ -2,6 +2,11 @@ local M = {}
 
 -- Function to execute GRAPH.QUERY
 function M.query(graph_name, query, timeout)
+	-- Ensure the query is a string, even if it's passed as nil
+	if type(query) ~= "string" then
+		query = "MATCH (n) RETURN n LIMIT 10" -- Fallback to a default query
+	end
+
 	local command = "redis-cli GRAPH.QUERY " .. graph_name .. ' "' .. query .. '"'
 	if timeout then
 		command = command .. " TIMEOUT " .. timeout
@@ -62,7 +67,7 @@ function M.run_query(optional_query)
 					return
 				end
 
-				-- Run the query (which will create the database if it doesn't exist)
+				-- Run the query
 				local result = M.query(selected_db, query)
 				require("ryuvim.utils").show_in_float("Query Result:\n" .. result)
 			end)

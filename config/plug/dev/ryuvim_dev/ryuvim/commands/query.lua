@@ -75,7 +75,8 @@ function M.run_query(optional_query)
 			end)
 		else
 			-- If the user selects an existing database, use the provided query or prompt for one
-			local query = optional_query or vim.fn.input("Enter your query: ")
+			-- local query = optional_query or vim.fn.input("Enter your query: ")
+			local query = vim.fn.input("Enter your query: ")
 			if query == "" then
 				print("No query entered. Operation cancelled.")
 				return

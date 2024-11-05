@@ -15,7 +15,9 @@ function M.hello()
 end
 
 vim.api.nvim_create_user_command("RyuAsk", db_ask.RyuAsk, {})
-vim.api.nvim_create_user_command("RyuQuery", db_query.run_query, {})
+vim.api.nvim_create_user_command("RyuQuery", function()
+	db_query.run_query()
+end, {})
 vim.api.nvim_create_user_command("RyuList", function()
 	local dbs = db_list.run()
 	if #dbs == 0 then

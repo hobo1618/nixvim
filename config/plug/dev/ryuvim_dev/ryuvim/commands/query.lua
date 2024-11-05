@@ -60,6 +60,8 @@ function M.run_query(optional_query)
 				-- Use the new database name for the query
 				selected_db = new_db_name
 
+				print(optional_query)
+
 				-- Use the provided query if it exists, otherwise prompt the user for a query
 				local query = optional_query or vim.fn.input("Enter your query: ")
 				if query == "" then

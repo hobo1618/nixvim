@@ -26,32 +26,10 @@
       "lua/ryuvim/commands/set_db.lua" = {
         source = ./ryuvim/commands/set_db.lua;
       };
+      "lua/ryuvim/commands/create.lua" = {
+        source = ./ryuvim/commands/create.lua;
+      };
     };
-  #
-  # This worked before modules
-  # {
-  #   "lua/ryuvim.lua" = {
-  #     source = ./ryuvim/init.lua;
-  #   };
-  # };
-  # {
-  #   "lua/ryuvim/init.lua" = {
-  #     source = ./ryuvim/init.lua;
-  #   };
-  # };
-
-  # extraPlugins = with pkgs.vimUtils; [
-  #   (buildVimPlugin {
-  #     pname = "ryuvim";
-  #     version = "1.0";
-  #     src = pkgs.fetchFromGitHub {
-  #       owner = "hobo1618";
-  #       repo = "ryuvim";
-  #       rev = "5e5d0599eee16741c1ae24a2090df4f87fb7640a";
-  #       hash = "sha256-K1dr3qLnuSK8AhE1jgcITgukeVY7jrwjsX9Xttahoks=";
-  #     };
-  #   })
-  # ];
 
   extraConfigLua = ''
     require('ryuvim')

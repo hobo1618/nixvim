@@ -6,6 +6,7 @@ local db_delete = require("ryuvim.commands.delete")
 local db_query = require("ryuvim.commands.query")
 local db_ask = require("ryuvim.commands.ask")
 local set_db = require("ryuvim.commands.set_db")
+local cypher_create = require("ryuvim.commands.create")
 -- M.list = require("ryuvim.commands.list")
 -- M.query = require("config.plug.dev.ryuvim_dev.ryuvim.commands.query")
 -- M.delete = require("config.plug.dev.ryuvim_dev.ryuvim.commands.delete")
@@ -37,6 +38,10 @@ vim.api.nvim_create_user_command("RyuList", function()
 	end
 	require("ryuvim.utils").show_in_float(table.concat(content, "\n"))
 end, {})
+
+-- Register the command
+vim.api.nvim_create_user_command("RyuCreate", cypher_create.RyuCreate, {})
+
 vim.api.nvim_create_user_command("RyuDelete", function()
 	db_delete.delete_graph()
 end, {})

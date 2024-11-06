@@ -1,6 +1,6 @@
 local M = {}
 local curl = require("plenary.curl")
-local db_query = require("ryuvim.commands.query")
+local db_query = require("ryuvim.graph.query")
 
 -- Function to generate the embedding asynchronously
 local function generate_embedding_async(description, callback)

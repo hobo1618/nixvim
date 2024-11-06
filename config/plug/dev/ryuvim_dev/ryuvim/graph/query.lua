@@ -1,5 +1,5 @@
 local M = {}
-local set_db = require("ryuvim.commands.set_db") -- Import the set_db module
+local set_db = require("ryuvim.graph.set_db") -- Import the set_db module
 
 -- Function to execute GRAPH.QUERY
 function M.query(query, timeout)

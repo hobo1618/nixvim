@@ -1,16 +1,12 @@
 local M = {}
 
 -- Load modules
-local db_list = require("ryuvim.commands.list")
-local db_delete = require("ryuvim.commands.delete")
-local db_query = require("ryuvim.commands.query")
-local db_ask = require("ryuvim.commands.ask")
-local set_db = require("ryuvim.commands.set_db")
-local cypher_create = require("ryuvim.commands.create")
--- M.list = require("ryuvim.commands.list")
--- M.query = require("config.plug.dev.ryuvim_dev.ryuvim.commands.query")
--- M.delete = require("config.plug.dev.ryuvim_dev.ryuvim.commands.delete")
--- Load other modules similarly...
+local db_list = require("ryuvim.graph.list")
+local db_delete = require("ryuvim.graph.delete")
+local db_query = require("ryuvim.graph.query")
+local db_ask = require("ryuvim.core.ask")
+local set_db = require("ryuvim.graph.set_db")
+local cypher_create = require("ryuvim.cypher.create")
 
 function M.hello()
 	print("Hello from my plugin!")
@@ -52,7 +48,7 @@ function M.setup()
 	-- M.delete.setup()
 	-- M.list.setup()
 	-- list.setup()
-	-- Setup calls for other commands
+	-- Setup calls for other graph
 end
 
 return M

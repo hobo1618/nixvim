@@ -5,6 +5,7 @@ local set_db = require("ryuvim.commands.set_db") -- Import the set_db module
 function M.query(query, timeout)
 	-- Use the active_db from set_db
 	local graph_name = set_db.active_db
+	print(graph_name)
 
 	-- Ensure a database is selected
 	if not graph_name then

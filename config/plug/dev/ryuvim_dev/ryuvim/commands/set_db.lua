@@ -10,8 +10,8 @@ function M.run()
 	-- Open a selection menu to choose the active database
 	vim.ui.select(db_list, { prompt = "Select an active database:" }, function(selected_db)
 		if selected_db then
-			_G.active_db = selected_db
-			print("Active database set to: " .. _G.active_db)
+			M.active_db = selected_db
+			print("Active database set to: " .. M.active_db)
 		else
 			print("No database selected. Active database not changed.")
 		end

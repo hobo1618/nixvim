@@ -23,6 +23,9 @@
       "lua/ryuvim/commands/ask.lua" = {
         source = ./ryuvim/commands/ask.lua;
       };
+      "lua/ryuvim/commands/set_db.lua" = {
+        source = ./ryuvim/commands/set_db.lua;
+      };
     };
   #
   # This worked before modules

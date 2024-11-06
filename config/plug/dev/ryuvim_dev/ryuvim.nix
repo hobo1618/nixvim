@@ -21,7 +21,7 @@
         source = ./ryuvim/openai.lua;
       };
       "lua/ryuvim/core/ask.lua" = {
-        source = ./ryuvim/graph/ask.lua;
+        source = ./ryuvim/core/ask.lua;
       };
       "lua/ryuvim/graph/set_db.lua" = {
         source = ./ryuvim/graph/set_db.lua;

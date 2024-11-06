@@ -1,6 +1,6 @@
 local M = {}
-local set_db = require("ryuvim.commands.set_db")
-local query_module = require("ryuvim.commands.query")
+local set_db = require("ryuvim.graph.set_db")
+local query_module = require("ryuvim.graph.query")
 local openai = require("ryuvim.openai")
 
 -- Utility function to extract YAML frontmatter and markdown body

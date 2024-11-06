@@ -1,7 +1,7 @@
 local M = {}
 
 -- Define the global variable for the active database
-_G.active_db = nil
+M.active_db = nil
 
 -- Function to set the active database
 function M.run()

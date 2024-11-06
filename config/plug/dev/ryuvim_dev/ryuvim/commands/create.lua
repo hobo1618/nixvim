@@ -1,7 +1,7 @@
 local M = {}
 local set_db = require("ryuvim.commands.set_db")
 local query_module = require("ryuvim.commands.query")
-local generate_embedding_async = require("ryuvim.openai").generate_embedding_async
+local generate_embedding_async = require("ryuvim.openai").generate_embedding
 
 -- Utility function to extract YAML frontmatter and markdown body
 local function parse_markdown_buffer(buffer_content)

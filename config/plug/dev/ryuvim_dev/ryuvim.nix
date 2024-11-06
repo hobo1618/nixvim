@@ -36,6 +36,8 @@
     require('ryuvim/utils')
     require('ryuvim/graph/list')
     require('ryuvim/openai')
+    require('ryuvim/core/ask')
+    require('ryuvim/cypher/create')
   '';
 
 }

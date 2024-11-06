@@ -28,7 +28,7 @@ function M.generate_embedding(text)
 	})
 
 	if response and response.status == 200 then
-		local response_json = vim.fn.json_decode(response.body)
+		local response_json = vim.json.decode(response.body) -- Use `vim.json.decode` here
 		return response_json.data[1].embedding
 	else
 		print("Error: " .. (response.status or "Unknown error"))
@@ -63,7 +63,7 @@ function M.generate_embedding_async(text, callback)
 		body = json_body,
 		callback = function(response)
 			if response and response.status == 200 then
-				local response_json = vim.fn.json_decode(response.body)
+				local response_json = vim.json.decode(response.body) -- Use `vim.json.decode` here
 				local vector = response_json.data[1].embedding
 				vim.schedule(function()
 					callback(vector)

@@ -1,5 +1,5 @@
 ---
-label: Question
+label: Foobar
 difficulty: Hard
 test: Math
 domain: Geometry and Trigonometry

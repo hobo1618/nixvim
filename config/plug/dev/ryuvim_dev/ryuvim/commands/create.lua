@@ -67,7 +67,4 @@ function M.RyuCreate()
 	create_node_from_buffer(buffer_content)
 end
 
--- Register the command
-vim.api.nvim_create_user_command("RyuCreate", M.RyuCreate, {})
-
 return M

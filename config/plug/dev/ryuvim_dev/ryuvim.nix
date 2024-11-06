@@ -27,7 +27,7 @@
         source = ./ryuvim/graph/set_db.lua;
       };
       "lua/ryuvim/cypher/create.lua" = {
-        source = ./ryuvim/graph/create.lua;
+        source = ./ryuvim/cypher/create.lua;
       };
     };
 

@@ -30,6 +30,12 @@ vim.api.nvim_create_user_command("GraphDelete", function()
 	db_delete.delete_graph()
 end, {})
 
+vim.api.nvim_create_autocmd("VimLeave", {
+	callback = function()
+		graph_save.save_graph()
+	end,
+})
+
 function M.setup()
 	print("Plugin loaded!")
 	-- M.query.setup()

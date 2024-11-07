@@ -23,7 +23,7 @@ end
 
 -- Command to handle the graph copy process
 function M.run_copy()
-	local db_list = list_module.run() -- Fetch the list of available graphs
+	local db_list = list_module.get_graphs() -- Fetch the list of available graphs
 
 	-- Show a selection menu to choose the source graph
 	vim.ui.select(db_list, { prompt = "Select source graph:" }, function(src)

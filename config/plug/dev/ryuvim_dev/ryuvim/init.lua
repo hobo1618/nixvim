@@ -7,6 +7,7 @@ local db_query = require("ryuvim.graph.query")
 local set_db = require("ryuvim.graph.set_db")
 local db_ask = require("ryuvim.core.ask")
 local cypher_create = require("ryuvim.cypher.create")
+local db_copy = require("ryuvim.graph.copy")
 
 -- Core Commands
 vim.api.nvim_create_user_command("RyuAsk", db_ask.RyuAsk, {})

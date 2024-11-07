@@ -17,6 +17,9 @@
       "lua/ryuvim/graph/delete.lua" = {
         source = ./ryuvim/graph/delete.lua;
       };
+      "lua/ryuvim/graph/copy.lua" = {
+        source = ./ryuvim/graph/copy.lua;
+      };
       "lua/ryuvim/openai.lua" = {
         source = ./ryuvim/openai.lua;
       };

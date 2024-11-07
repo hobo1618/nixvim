@@ -13,7 +13,7 @@ function M.get_graphs()
 	return db_list -- Return the table of database names
 end
 
-function M.list()
+function M.display_graphs()
 	local dbs = M.get_graphs()
 	if #dbs == 0 then
 		print("No databases found.")

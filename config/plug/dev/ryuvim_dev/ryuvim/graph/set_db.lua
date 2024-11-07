@@ -5,7 +5,7 @@ M.active_db = nil
 
 -- Function to set the active database
 function M.run()
-	local db_list = require("ryuvim.graph.list").run() -- Fetch the list of databases
+	local db_list = require("ryuvim.graph.list").get_graphs() -- Fetch the list of databases
 
 	-- Open a selection menu to choose the active database
 	vim.ui.select(db_list, { prompt = "Select an active database:" }, function(selected_db)

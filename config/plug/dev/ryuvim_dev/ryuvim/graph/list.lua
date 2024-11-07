@@ -1,6 +1,6 @@
 local M = {}
 
-function M.run()
+function M.get_graphs()
 	-- Run the shell command and capture the output
 	local output = require("ryuvim.utils").run_shell("redis-cli GRAPH.LIST")
 
@@ -14,7 +14,7 @@ function M.run()
 end
 
 function M.list()
-	local dbs = M.run()
+	local dbs = M.get_graphs()
 	if #dbs == 0 then
 		print("No databases found.")
 		return

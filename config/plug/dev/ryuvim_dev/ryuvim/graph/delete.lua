@@ -3,7 +3,7 @@ local M = {}
 function M.db_list()
 	-- Fetch the list of databases using the function from the 'list' module
 	-- Replace 'get_databases' with the actual function name in the list module
-	local db_list = require("ryuvim.graph.list").run()
+	local db_list = require("ryuvim.graph.list").get_graphs()
 
 	-- Ensure the result is a table and return it
 	return db_list or {}

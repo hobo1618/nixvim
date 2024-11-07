@@ -20,6 +20,9 @@
       "lua/ryuvim/graph/save.lua" = {
         source = ./ryuvim/graph/save.lua;
       };
+      "lua/ryuvim/graph/create.lua" = {
+        source = ./ryuvim/graph/create.lua;
+      };
       "lua/ryuvim/graph/copy.lua" = {
         source = ./ryuvim/graph/copy.lua;
       };

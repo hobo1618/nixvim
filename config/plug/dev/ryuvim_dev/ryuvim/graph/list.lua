@@ -13,4 +13,22 @@ function M.run()
 	return db_list -- Return the table of database names
 end
 
+function M.list()
+	local dbs = M.run()
+	if #dbs == 0 then
+		print("No databases found.")
+		return
+	end
+
+	-- Print each database name
+	--
+	local content = { "List of Databases:" }
+	print()
+	for _, db in ipairs(dbs) do
+		-- print("- " .. db)
+		table.insert(content, "- " .. db)
+	end
+	require("ryuvim.utils").show_in_float(table.concat(content, "\n"))
+end
+
 return M

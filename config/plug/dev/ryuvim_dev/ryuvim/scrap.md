@@ -1,16 +1,16 @@
 ---
-label: Foobar
-difficulty: Hard
-test: Math
-domain: Geometry and Trigonometry
+label: foobar
+difficulty: hard
+test: math
+domain: geometry and trigonometry
 ---
 
-# My Question
+# my question
 
-## Prompt
+## prompt
 
-Foobar etc
+foobar etc
 
-## Answer Explanation
+## answer explanation
 
-BazBuz baby girl
+bazbuz baby girl

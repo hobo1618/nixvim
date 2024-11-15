@@ -6,8 +6,8 @@ function M.fetch_results(label)
 
 	-- Use GraphQuery to execute the query
 	local db_query = require("ryuvim.graph.query")
-	print("query: ", query)
 	local raw_result = db_query.query(query) -- Assume run_query returns raw result string
+	print(raw_result .. " <== raw_result")
 	-- Check if the raw result is nil or empty
 	if not raw_result or raw_result == "" then
 		print("No results found for label: " .. label)

@@ -1,8 +1,28 @@
 local M = {}
 
+-- Function to fetch results based on a given label by executing a Cypher query
+function M.fetch_results(label)
+	local query = "MATCH (n:" .. label .. ") RETURN n"
+
+	-- Use GraphQuery to execute the query
+	local db_query = require("ryuvim.graph.query")
+	local raw_result = db_query.run_query(query) -- Assume run_query returns raw result string
+
+	-- Parse the raw result into a structured table of { title, content }
+	local results = {}
+	for line in raw_result:gmatch("[^\r\n]+") do
+		local title, content = line:match("n%.title%s*:%s*(.-), n%.content%s*:%s*(.*)")
+		if title and content then
+			table.insert(results, { title = title, content = content })
+		end
+	end
+
+	return results
+end
+
 -- Function to display search results with filtering and preview
 function M.ryu_search(label)
-	-- Placeholder function to fetch results based on label (adapt this to query your DB)
+	-- Fetch results based on label
 	local results = M.fetch_results(label)
 
 	if not results or #results == 0 then
@@ -105,16 +125,6 @@ function M.ryu_search(label)
 			vim.api.nvim_win_close(preview_win, true)
 		end,
 	})
-end
-
--- Placeholder function to fetch results (replace this with your DB query)
-function M.fetch_results(label)
-	return {
-		{ title = "Result 1", content = "# Result 1\n\nThis is the content for result 1." },
-		{ title = "Result 2", content = "# Result 2\n\nThis is the content for result 2." },
-		{ title = "Result 3", content = "# Result 3\n\nThis is the content for result 3." },
-		-- Add more dummy results as needed
-	}
 end
 
 return M

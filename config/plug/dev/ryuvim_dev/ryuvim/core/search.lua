@@ -6,9 +6,12 @@ function M.fetch_results(label)
 
 	-- Use GraphQuery to execute the query
 	local db_query = require("ryuvim.graph.query")
-	local raw_result = db_query.run_query(query) -- Assume run_query returns raw result string
-
-	print("raw result " .. raw_result)
+	local raw_result = db_query.query(query) -- Assume run_query returns raw result string
+	-- Check if the raw result is nil or empty
+	if not raw_result or raw_result == "" then
+		print("No results found for label: " .. label)
+		return nil
+	end
 
 	-- Parse the raw result into a structured table of { title, content }
 	local results = {}

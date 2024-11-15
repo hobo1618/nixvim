@@ -1,6 +1,5 @@
 local M = {}
 
--- Function to fetch results based on a given label by executing a Cypher query
 function M.fetch_results(label)
 	-- Construct the Cypher query
 	local query = "MATCH (n:" .. label .. ") RETURN n.test, n.content"
@@ -16,22 +15,32 @@ function M.fetch_results(label)
 		return nil
 	end
 
-	-- Split `raw_result` by lines
+	-- Split the raw result by lines, filtering out metadata and empty lines
 	local result_lines = {}
 	for line in raw_result:gmatch("[^\r\n]+") do
-		-- Exclude metadata lines like "Cached execution" or "Query internal execution time"
-		if not line:match("Cached execution") and not line:match("Query internal execution time") then
+		if
+			not line:match("Cached execution")
+			and not line:match("Query internal execution time")
+			and line:match("%S")
+		then
 			table.insert(result_lines, line)
 		end
 	end
 
-	-- Parse the meaningful lines to extract `title` and `content`
+	-- Verify if we have at least header + data lines
+	if #result_lines < 2 then
+		print("No results found for label: " .. label)
+		return nil
+	end
+
+	-- Parse the data lines to extract `title` and `content`
 	local results = {}
-	for i = 2, #result_lines do -- Start from 2 to skip the header line (e.g., "n.test, n.content")
+	for i = 2, #result_lines do -- Start from 2 to skip the header line
 		local line = result_lines[i]
-		local title, content = line:match("([^,]+)%s*,%s*(.*)") -- Adjust pattern for CSV-like format
+		-- Assuming the format is CSV-like with `n.test` and `n.content`
+		local title, content = line:match("([^,]+)%s*,%s*(.*)")
 		if title and content then
-			table.insert(results, { title = title, content = content })
+			table.insert(results, { title = title:match("^%s*(.-)%s*$"), content = content:match("^%s*(.-)%s*$") }) -- Trim whitespace
 		end
 	end
 

@@ -2,27 +2,40 @@ local M = {}
 
 -- Function to fetch results based on a given label by executing a Cypher query
 function M.fetch_results(label)
+	-- Construct the Cypher query
 	local query = "MATCH (n:" .. label .. ") RETURN n.test, n.content"
 
 	-- Use GraphQuery to execute the query
 	local db_query = require("ryuvim.graph.query")
 	local raw_result = db_query.query(query) -- Assume run_query returns raw result string
-	print(raw_result .. " <== raw_result")
+	print(raw_result .. " <== raw_result") -- Debugging output
+
 	-- Check if the raw result is nil or empty
 	if not raw_result or raw_result == "" then
 		print("No results found for label: " .. label)
 		return nil
 	end
 
-	-- Parse the raw result into a structured table of { title, content }
-	local results = {}
+	-- Split `raw_result` by lines
+	local result_lines = {}
 	for line in raw_result:gmatch("[^\r\n]+") do
-		local title, content = line:match("n%.title%s*:%s*(.-), n%.content%s*:%s*(.*)")
+		-- Exclude metadata lines like "Cached execution" or "Query internal execution time"
+		if not line:match("Cached execution") and not line:match("Query internal execution time") then
+			table.insert(result_lines, line)
+		end
+	end
+
+	-- Parse the meaningful lines to extract `title` and `content`
+	local results = {}
+	for i = 2, #result_lines do -- Start from 2 to skip the header line (e.g., "n.test, n.content")
+		local line = result_lines[i]
+		local title, content = line:match("([^,]+)%s*,%s*(.*)") -- Adjust pattern for CSV-like format
 		if title and content then
 			table.insert(results, { title = title, content = content })
 		end
 	end
 
+	-- Return parsed results
 	return results
 end
 

@@ -2,7 +2,7 @@ local M = {}
 
 -- Function to fetch results based on a given label by executing a Cypher query
 function M.fetch_results(label)
-	local query = "MATCH (n:" .. label .. ") RETURN n"
+	local query = "MATCH (n:" .. label .. ") RETURN n.test, n.content"
 
 	-- Use GraphQuery to execute the query
 	local db_query = require("ryuvim.graph.query")

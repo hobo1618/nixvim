@@ -29,7 +29,7 @@ function M.fetch_results(label)
 
 	-- Verify if we have at least header + data lines
 	if #result_lines < 2 then
-		print("No results found for label: " .. label)
+		print("Not enough results found for label: " .. label)
 		return nil
 	end
 

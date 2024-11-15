@@ -8,6 +8,8 @@ function M.fetch_results(label)
 	local db_query = require("ryuvim.graph.query")
 	local raw_result = db_query.run_query(query) -- Assume run_query returns raw result string
 
+	print("raw result " .. raw_result)
+
 	-- Parse the raw result into a structured table of { title, content }
 	local results = {}
 	for line in raw_result:gmatch("[^\r\n]+") do

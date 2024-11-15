@@ -2,7 +2,7 @@ local M = {}
 
 function M.fetch_results(label)
 	-- Construct the Cypher query
-	local query = "MATCH (n:" .. label .. ") RETURN n.test, n.content"
+	local query = "MATCH (n:" .. label .. ") RETURN n"
 
 	-- Use GraphQuery to execute the query
 	local db_query = require("ryuvim.graph.query")
@@ -10,10 +10,10 @@ function M.fetch_results(label)
 	print(raw_result .. " <== raw_result") -- Debugging output
 
 	-- Check if the raw result is nil or empty
-	-- if not raw_result or raw_result == "" then
-	-- 	print("No results found for label: " .. label)
-	-- 	return nil
-	-- end
+	if not raw_result or raw_result == "" then
+		print("No results found for label: " .. label)
+		return nil
+	end
 
 	-- Split the raw result by lines, filtering out metadata and empty lines
 	local result_lines = {}

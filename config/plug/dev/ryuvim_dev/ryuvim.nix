@@ -29,6 +29,9 @@
       "lua/ryuvim/openai.lua" = {
         source = ./ryuvim/openai.lua;
       };
+      "lua/ryuvim/core/search.lua" = {
+        source = ./ryuvim/core/search.lua;
+      };
       "lua/ryuvim/core/ask.lua" = {
         source = ./ryuvim/core/ask.lua;
       };
@@ -46,6 +49,7 @@
     require('ryuvim/graph/list')
     require('ryuvim/openai')
     require('ryuvim/core/ask')
+    require('ryuvim/core/search')
     require('ryuvim/cypher/create')
   '';
 

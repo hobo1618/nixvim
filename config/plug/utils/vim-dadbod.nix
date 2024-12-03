@@ -2,6 +2,6 @@
 {
   plugins.vim-dadbod = {
     enable = true;
-    package = pkgs.vimPlugins.vim-dadbod;
+    # package = pkgs.vimPlugins.vim-dadbod;
   };
 }

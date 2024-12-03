@@ -2,9 +2,9 @@ let
   pkgs = import <nixpkgs> {};
 in
   pkgs.fetchFromGitHub {
-    owner = "hobo1618";
-    repo = "ryuvim";
-    rev = "5e5d0599eee16741c1ae24a2090df4f87fb7640a";
-    hash = "sha256-K1dr3qLnuSK8AhE1jgcITgukeVY7jrwjsX9Xttahoks=";
+    owner = "kristijanhusak";
+    repo = "vim-dadbod-completion";
+    rev = "04485bfb53a629423233a4178d71cd4f8abf7406";
+    hash = "sha256-vcnECBKjEt/iz8WSUI0jJBxasy7cRuCQcaQayHXydrE=";
   }
 

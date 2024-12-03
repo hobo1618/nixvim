@@ -13,7 +13,7 @@
     ./plug/completion/copilot-cmp.nix
     ./plug/completion/lspkind.nix
     ./plug/completion/schemastore.nix
-    # ./plug/completion/vim-dadbod-completion.nix
+    ./plug/completion/vim-dadbod-completion.nix
 
     ./plug/git/gitlinker.nix
     ./plug/git/gitsigns.nix
@@ -45,7 +45,7 @@
     # ./plug/ui/ryuvim.nix
     ./plug/ui/noice.nix
     ./plug/ui/nvim-notify.nix
-    # ./plug/ui/vim-dadbod-ui.nix
+    ./plug/ui/vim-dadbod-ui.nix
     #./plug/ui/precognition.nix
     ./plug/ui/telescope.nix
 

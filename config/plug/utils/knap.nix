@@ -28,9 +28,5 @@
     
     -- F8 invokes a SyncTeX forward search, or similar, where appropriate
     kmap({ 'n', 'v', 'i' },'<F8>', function() require("knap").forward_jump() end)
-    texoutputext = "pdf"
-    textopdf = "pdflatex -synctex=1 -halt-on-error -interaction=batchmode %docroot%"
-    textopdfviewerlaunch = "mupdf %outputfile%"
-    textopdfviewerrefresh = "kill -HUP %pid%"
   '';
 }

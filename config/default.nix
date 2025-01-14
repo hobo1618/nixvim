@@ -8,6 +8,7 @@
 
     ./plug/colorscheme/colorscheme.nix
 
+    ./plug/completion/cmp-vimtex.nix
     ./plug/completion/cmp.nix
     ./plug/completion/codecompanion.nix
     ./plug/completion/copilot-cmp.nix
@@ -25,6 +26,7 @@
     ./plug/lsp/lsp.nix
     ./plug/lsp/lspsaga.nix
     ./plug/lsp/none-ls.nix
+    ./plug/lsp/vimtex.nix
     ./plug/lsp/trouble.nix
     ./plug/lsp/mdx.nix
 

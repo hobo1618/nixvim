@@ -1,5 +1,5 @@
 {
-  plugins.trouble = {
+  plugins.cmp-vimtex = {
     enable = true;
   };
 }

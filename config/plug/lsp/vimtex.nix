@@ -1,5 +1,5 @@
 {
-  plugins.trouble = {
+  plugins.vimtex = {
     enable = true;
   };
 }

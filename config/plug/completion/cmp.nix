@@ -44,6 +44,7 @@
           }
           { name = "rg"; }
           { name = "nvim_lua"; }
+          { name = "vimtex"; }
 
         ];
 

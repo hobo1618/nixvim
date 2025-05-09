@@ -102,6 +102,7 @@
     theme = "paradise";
     extraConfigLua = ''
       _G.theme = "${config.theme}"
+      require("mdx").setup()
     '';
   };
 }

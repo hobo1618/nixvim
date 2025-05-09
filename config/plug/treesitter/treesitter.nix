@@ -9,12 +9,16 @@ let
       rev = "6f5a6e3e32b0c89824f157cfa2a972207f20b5e3";
       sha256 = "sha256-9zZ+tb7v9V9M3h1QlNcs1IMOm2ztJd4Z2NEcXqXAOE4=";
     };
+    # 👇 required to declare language
+    passthru = {
+      language = "mdx";
+    };
   });
 in
 {
   filetype.extension = {
     liq = "liquidsoap";
-    mdx = "mdx"; # 👈 ensures .mdx files are detected
+    mdx = "mdx";
   };
 
   plugins.treesitter = {
@@ -33,9 +37,9 @@ in
 
     nixvimInjections = true;
 
-    grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars // {
-      mdx = mdxGrammar;
-    };
+    grammarPackages = pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins:
+      plugins ++ [ mdxGrammar ]
+    );
   };
 
   extraConfigLua = ''

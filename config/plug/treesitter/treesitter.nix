@@ -9,10 +9,7 @@ let
       rev = "6f5a6e3e32b0c89824f157cfa2a972207f20b5e3";
       sha256 = "sha256-9zZ+tb7v9V9M3h1QlNcs1IMOm2ztJd4Z2NEcXqXAOE4=";
     };
-    # 👇 required to declare language
-    passthru = {
-      language = "mdx";
-    };
+    passthru.language = "mdx"; # required!
   });
 in
 {
@@ -37,20 +34,28 @@ in
 
     nixvimInjections = true;
 
-    grammarPackages = pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins:
-      plugins ++ [ mdxGrammar ]
-    );
+    grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+      bash
+      css
+      html
+      javascript
+      json
+      lua
+      markdown
+      markdown_inline
+      nix
+      tsx
+      typescript
+      yaml
+      mdxGrammar # 👈 custom grammar injected directly here
+    ];
   };
 
   extraConfigLua = ''
     local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-
-    parser_config.liquidsoap = {
-      filetype = "liquidsoap",
-    }
+    parser_config.liquidsoap = { filetype = "liquidsoap" }
   '';
 }
-
 
 
 # { pkgs, ... }:
